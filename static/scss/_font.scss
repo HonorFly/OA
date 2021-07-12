@@ -1,0 +1,23 @@
+//字体库
+@font-face {
+    font-family: BebasNeue;
+    src: url(/static/font/bebasneue.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: PingFangSC-Medium;
+    src: url(/static/font/PingFang-Medium_downcc.otf);
+    font-weight: 600 !important;
+}
+
+@font-face {
+    font-family: PingFangSC-Regular;
+    src: url(/static/font/PingFang-Regular.otf);
+    // font-weight: 500;
+}
+
+@font-face {
+    font-family: PingFangSC-Light;
+    src: url(/static/font/PingFang-Light.ttf);
+}
