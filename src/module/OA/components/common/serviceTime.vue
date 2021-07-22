@@ -5,7 +5,7 @@
         <span>到达时间:</span>
         <van-field
           ref="person"
-          v-model.trim="currentDate1"
+          v-model.trim="data[index].fromTime"
           placeholder="请选择到达时间"
           readonly
           @click="showDateTimePicker1"
@@ -15,7 +15,7 @@
         <span>离开时间:</span>
         <van-field
           ref="person"
-          v-model.trim="currentDate2"
+          v-model.trim="data[index].endTime"
           placeholder="请选择离开时间"
           readonly
           @click="showDateTimePicker2"
@@ -25,7 +25,7 @@
         <span>维修时长:</span>
           <van-field
           ref="person"
-          v-model.trim="maintainTime"
+          v-model.trim="data[index].hours"
           placeholder="维修时长"
           readonly
         />
@@ -34,7 +34,7 @@
         <span>出差时长:</span>
           <van-field
           ref="person"
-          v-model.trim="businessTripTime"
+          v-model.trim="data[index].travelHours"
           placeholder="请输入出差时长"
         />
       </li>

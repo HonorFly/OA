@@ -13,7 +13,7 @@ request.defaults.transformRequest = [
   data => {
     return toData(data);
     // return data;
-    //return JSON.stringify(data)
+    // return JSON.stringify(data);
   }
 ];
 request.defaults.baseURL = `${process.env.API_HOST.URL}/api/`; //如果url不是绝对路径，那么会将baseURL和url拼接作为请求的接口地址

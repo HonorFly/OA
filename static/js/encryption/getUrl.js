@@ -99,7 +99,7 @@ function commonMessage() {
       medicalDetail: medicalDetail,
       urlMedical: urlMedical,
       urlGod: urlGod,
-      userid: g_userid || 8, // 刘翠蕾1962 李敏2077 马海平1905 丁哥 1950 董1956 翟 1963
+      userid: g_userid || 2006, // 刘翠蕾1962 李敏2077 马海平1905 丁哥 1950 董1956 翟 1963
       token: g_token,
       urlBanner: urlBanner,
       urlQuestionnaire: urlQuestionnaire

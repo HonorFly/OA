@@ -3,36 +3,28 @@
     <div class="main">
       <ul>
         <li>
-          <span>派工单号</span><i>SN5271365265</i>
+          <span>派工单号</span><i>{{data.sn}}</i>
         </li>
         <li>
           <div class="leftLay">
-            <span>派工类型</span><i>原厂派工服务</i>
+            <span>维修类型</span><i>{{data.repairType}}</i>
           </div>
           <div class="rightLay">
-            <span>维修类型</span><i>保内维修</i>
+            <span>工程师</span><i>{{data.engineerName}}</i>
           </div>
         </li>
         <li>
            <div class="leftLay">
-          <span>工程师</span><i>刘鹏</i>
+          <span>开单时间</span><i>{{data.dispatchTime}}</i>
           </div>
           <div class="rightLay">
-          <span>派单状态</span><i>派单中</i>
-           </div>
-        </li>
-        <li>
-           <div class="leftLay">
-          <span>开单时间</span><i>2021-07-09</i>
-          </div>
-          <div class="rightLay">
-           <span>开单人</span><i>鹏哥哥</i>
+           <span>开单人</span><i>{{data.fullName}}</i>
            </div>
         </li>
       </ul>
       <div class="info">服务信息</div>
       <span>{{ data.itemType || data.type }}</span>
-      <!-- <item-status-vue :status="data.status"></item-status-vue> -->
+      <item-status-vue :status="0"></item-status-vue>
     </div>
   </li>
 </template>
@@ -109,7 +101,7 @@
           height: 100%;
         }
       }
-      & > div {
+      & > div.info {
         font-family: PingFangSC-Light;
         font-size: 13px;
         color: #fff;

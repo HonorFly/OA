@@ -15,7 +15,7 @@
             </span>
             派工单号
           </h3>
-          <span>PG20200330150630</span>
+          <span>{{details.sn}}</span>
         </div>
         <div class="common description">
           <h3>
@@ -29,7 +29,7 @@
             故障描述
           </h3>
           <van-field
-            v-model="desc"
+            v-model="details.faultDescribe"
             type="textarea"
             autosize
             rows="1"
@@ -48,7 +48,7 @@
             服务内容
           </h3>
           <van-field
-            v-model="content"
+            v-model="details.serviceContent"
             type="textarea"
             autosize
             rows="1"
@@ -99,7 +99,7 @@
             服务时间
           </h3>
           <ul>
-            <service-time-vue v-for="(item,index) in tempArr" :key="index" :data="tempArr" :index="index" @handle="clickHandle"></service-time-vue>
+            <service-time-vue v-for="(item,index) in dispatchItem" :key="index" :data="dispatchItem" :index="index" @handle="clickHandle"></service-time-vue>
           </ul>
         </div>
       </div>
@@ -128,7 +128,7 @@
   export default {
     data() {
       return {
-        tempArr:[1],
+        dispatchItem:[],
         file: [],
         fileList: [],
         content:"鹏哥哥在帝豪包间全套服务一次",
@@ -147,14 +147,15 @@
       this.scrollTop = 0;
       this.details = {};
       this.noteFlag = false;
+      this.getDispatchDetail()
     },
     methods: {
       ...mapMutations(["setTransition"]),
       clickHandle(val){
         if(val==='add'){
-          this.tempArr.push(this.tempArr.length+1)
+          this.dispatchItem.push(this.dispatchItem.length+1)
         }else{
-          this.tempArr.pop()
+          this.dispatchItem.pop()
         }
       },
       submit(val) {
@@ -194,6 +195,15 @@
       updata(val) {
         this.file = val;
       },
+      getDispatchDetail(){
+         _getData("dispatch/getDispatch",{id:"1"||this.$route.query.id}).then(res=>{
+           console.log("详情：：：",res)
+           this.details = res.dispatch || {};
+           res.dispatchItem.push({fromTime:"",endTime:"",hours:"",traveHours:""});
+          //  console.log(res.dispatchItem)
+           this.dispatchItem =res.dispatchItem;
+         })
+      }
     },
     components: {
       headerVue,

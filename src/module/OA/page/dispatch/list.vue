@@ -74,11 +74,7 @@
         footer,
         index: 0,
         approveList: [], //我已审批
-        awaitList: [
-          {},
-          {},
-          {},
-        ], //待我审批
+        awaitList: [], //待我审批
         awaitCurrentPage: 1, //当前页
         currentPage: 1, //当前页
         awaitPageCount: 1, //总页数
@@ -90,7 +86,7 @@
     },
     props: ["isApproval"],
     created(){
-        // this.getAwaitData()
+        this.getAwaitData()
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -188,7 +184,7 @@
         this.currentPage = currentPage;
       },
       async getAwaitData() {
-        await _getData("license/licenseAuditList", {
+        await _getData("dispatch/dispatchList", {
           currentPage: this.awaitCurrentPage,
           countPerPage: "10"
         }).then(data => {
