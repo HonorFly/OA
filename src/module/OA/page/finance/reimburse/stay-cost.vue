@@ -17,7 +17,7 @@
           @btnHundleClick="btnHundleClick"
         ></cost-type-vue>
         <h3>
-          所在城市<i><img src="../../../../../assets/images/red-star.png"/></i>
+          所在城市<i><img src="../../../../../assets/images/red-star.png" /></i>
         </h3>
         <van-cell-group @click.native="type != 'details' && city()">
           <van-field
@@ -54,7 +54,7 @@
             <img src="../../../../../assets/images/calendar.png" alt="" /></div
         ></van-cell-group>
         <h3>
-          住房单价<i><img src="../../../../../assets/images/red-star.png"/></i>
+          住房单价<i><img src="../../../../../assets/images/red-star.png" /></i>
         </h3>
         <van-cell-group class="cost-description">
           <van-field
@@ -66,9 +66,7 @@
             placeholder="请输入金额"
           />
         </van-cell-group>
-        <h3>
-          其他消费
-        </h3>
+        <h3>其他消费</h3>
         <van-cell-group class="">
           <van-field
             v-model="otherValue"
@@ -80,7 +78,7 @@
           />
         </van-cell-group>
         <h3>
-          费用描述<i><img src="../../../../../assets/images/red-star.png"/></i>
+          费用描述<i><img src="../../../../../assets/images/red-star.png" /></i>
         </h3>
         <van-cell-group class="cost-description">
           <van-field
@@ -94,7 +92,7 @@
           />
         </van-cell-group>
         <h3>
-          发票总额<i><img src="../../../../../assets/images/red-star.png"/></i>
+          发票总额<i><img src="../../../../../assets/images/red-star.png" /></i>
         </h3>
         <van-cell-group class="">
           <van-field
@@ -124,6 +122,7 @@
         >保存新增一项</x-button
       >
     </div>
+    <van-calendar v-model="show" type="range" @confirm="onConfirm" />
   </div>
 </template>
 
@@ -138,7 +137,7 @@
   import { getDay, iosKeyboard } from "../../../components/mixins/mixins";
   const addressData = provinceList;
 
-  addressData.forEach(province => {
+  addressData.forEach((province) => {
     province.children = cityList[province.value];
     // province.children.forEach(city => {
     //   city.children = areaList[city.value];
@@ -157,13 +156,13 @@
         btnText: "",
         selectedIndex1: [0],
 
-        value: "" //入住日期
+        value: "", //入住日期
       };
     },
     components: { headerVue, costTypeVue, TPVue },
     mixins: [cost_mixins, getDay, iosKeyboard],
     beforeRouteEnter(to, from, next) {
-      next(vm => {
+      next((vm) => {
         vm.price = "";
         vm.cityName = "";
         vm.otherValue = "";
@@ -196,9 +195,9 @@
           console.log(detailsData);
           vm.value = detailsData.time;
           // vm.$refs.costType.btnText = detailsData;
-          console.log(vm.dayNum)
+          console.log(vm.dayNum);
           vm.dayNum = detailsData.info4;
-          console.log(vm.dayNum)
+          console.log(vm.dayNum);
           vm.price = detailsData.info3;
           vm.otherValue = detailsData.info5;
           vm.btnText = detailsData.smallTypeName;
@@ -227,20 +226,20 @@
     },
     watch: {
       dayNum(newVal) {
-        console.log(newVal)
-        if(this.type!="details"){
+        console.log(newVal);
+        if (this.type != "details") {
           this.costValue =
-          Number(this.price || 0) * newVal + Number(this.otherValue || 0);
+            Number(this.price || 0) * newVal + Number(this.otherValue || 0);
         }
-        }
+      },
     },
     activated() {
       _getData("category/getCategory", {
         type: "2",
         parentId: "459",
-        typeName: "bill"
-      }).then(data => {
-        column2 = _.map(data, v => {
+        typeName: "bill",
+      }).then((data) => {
+        column2 = _.map(data, (v) => {
           return { text: v.wordBook, value: v.wordBook, id: v.id };
         });
       });
@@ -258,7 +257,7 @@
 
               this.selectedIndex1 = selectedIndex;
               this.$refs.city.$el.classList.remove("errorFocus");
-            }
+            },
           });
           // this.CascadePicker = this.$createCascadePicker({
           //   data: ["北上广深", "省级", "县级市", "地级市"],
@@ -349,10 +348,10 @@
             TP: this.$refs.TP.TPflag ? this.$refs.TP.TP : "",
             tpnote: this.$refs.TP.TPdescriptionValue || "",
             tptype: this.$refs.TP.TPflag ? this.$refs.TP.TPtype : "",
-            type: this.$route.query.id
+            type: this.$route.query.id,
             // withhold: 0,
             // withholdNote: ""
-          }
+          },
         ];
         this.cost = [...this.cost, ...arg];
         if (i == 1) {
@@ -379,8 +378,8 @@
           //this.$router.go(0);
           this.reload();
         }
-      }
-    }
+      },
+    },
   };
 </script>
 

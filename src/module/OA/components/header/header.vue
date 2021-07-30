@@ -1,7 +1,7 @@
 <template>
   <div id="header" :class="createClass">
-    <span class="back" @click="goPrev">
-      <img src="../../../../assets/images/back.png" alt="" />
+    <span class="back" @click="showBack && goPrev()">
+      <img v-show="showBack" src="../../../../assets/images/back.png" alt="" />
     </span>
     <h2>
       {{ name }}
@@ -13,16 +13,14 @@
       <span
         v-if="
           type == 'details' &&
-            userId == (data.addUser || data.applyUser) &&
-            (data.status == 0 || data.status == 2 || data.status == 4)
+          userId == (data.addUser || data.applyUser) &&
+          (data.status == 0 || data.status == 2 || data.status == 4)
         "
         @click="editHandle()"
       >
         编辑
       </span>
-      <span v-if="isDelete" @click="delClick">
-        删除
-      </span>
+      <span v-if="isDelete" @click="delClick"> 删除 </span>
     </span>
     <!-- <div class="placeholder"></div> -->
   </div>
@@ -38,7 +36,7 @@
       //监听浏览器返回事件
       window.addEventListener(
         "popstate",
-        e => {
+        (e) => {
           this.$store.commit("setTransition", "turn-off");
         },
         false
@@ -54,7 +52,7 @@
         } else {
           return "ios-header";
         }
-      }
+      },
     },
     methods: {
       editHandle() {
@@ -63,8 +61,8 @@
           path: this.$route.path,
           query: {
             ...this.$route.query,
-            ...{ type: "apply", isApproval: false }
-          }
+            ...{ type: "apply", isApproval: false },
+          },
         });
       },
       close() {
@@ -100,22 +98,26 @@
       },
       delClick() {
         this.$emit("delClick");
-      }
+      },
     },
     props: {
       name: { type: String, default: "" },
       isShowClose: { type: Boolean, default: false },
       status: { type: Number, default: 1 },
       data: {},
+      showBack: {
+        type: Boolean,
+        default: true,
+      },
       isDelete: {
         //是否显示删除按钮
         type: Boolean,
-        default: false
+        default: false,
       },
       type: { type: String, default: "apply" },
       isApproval: { type: [Boolean, String], default: false },
-      judgeBack: { type: Boolean, default: false }
-    }
+      judgeBack: { type: Boolean, default: false },
+    },
   };
 </script>
 

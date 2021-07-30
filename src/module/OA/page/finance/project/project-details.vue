@@ -433,6 +433,7 @@
       :data="details"
       type="project"
     ></footer-approve-button-vue>
+    <van-calendar v-model="show" type="range" @confirm="onConfirm" />
   </div>
 </template>
 

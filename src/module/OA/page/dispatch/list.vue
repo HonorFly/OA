@@ -18,7 +18,7 @@
             :getData="getAwaitData"
             type="dispatch"
             :isInit="isInit"
-            :isApproval="isApproval"
+            :isApproval="true"
             :isShowfooterApproval="true"
             @sureClick="sureClick"
             @search="search"
@@ -59,13 +59,13 @@
     {
       name: "待我审批",
       icon: "approve-await-icon.png",
-      iconActive: "approve-await-icon-active.png"
+      iconActive: "approve-await-icon-active.png",
     },
     {
       name: "我已审批",
       icon: "approve-icon.png",
-      iconActive: "approve-icon-active.png"
-    }
+      iconActive: "approve-icon-active.png",
+    },
   ];
 
   export default {
@@ -81,15 +81,15 @@
         pageCount: 1, //总页数
         searchVal: "",
         isInit: false,
-        selectType: ""
+        selectType: "",
       };
     },
     props: ["isApproval"],
-    created(){
-        this.getAwaitData()
+    created() {
+      this.getAwaitData();
     },
     beforeRouteEnter(to, from, next) {
-      next(vm => {
+      next((vm) => {
         if (from.name == "首页") {
           vm.index = 0;
           vm.searchVal = "";
@@ -100,8 +100,8 @@
           vm.awaitCurrentPage = 1;
           vm.pageCount = 1;
           vm.awaitPageCount = 1;
-          vm.$refs.record.currentPage = 1;
-          vm.$refs.recordAwait.currentPage = 1;
+          vm.$refs.record && (vm.$refs.record.currentPage = 1);
+          vm.$refs.recordAwait && (vm.$refs.recordAwait.currentPage = 1);
           vm.getAwaitData();
           // vm.getData();
         } else {
@@ -186,8 +186,10 @@
       async getAwaitData() {
         await _getData("dispatch/dispatchList", {
           currentPage: this.awaitCurrentPage,
-          countPerPage: "10"
-        }).then(data => {
+          countPerPage: "10",
+          type: this.selectType,
+          name: this.searchVal,
+        }).then((data) => {
           console.log("待我审批列表", data);
           this.awaitPageCount = data.totalPages;
           this.awaitList = [...this.awaitList, ...data.data];
@@ -199,21 +201,21 @@
           name: this.searchVal,
           status: "approval",
           currentPage: this.currentPage,
-          countPerPage: "10"
-        }).then(data => {
+          countPerPage: "10",
+        }).then((data) => {
           console.log("我已审批列表", data);
           this.pageCount = data.totalPages;
           this.approveList = [...this.approveList, ...data.data];
         });
-      }
+      },
     },
     components: {
       headerVue,
       footerVue,
       Swiper,
       SwiperItem,
-      recordVue
-    }
+      recordVue,
+    },
   };
 </script>
 

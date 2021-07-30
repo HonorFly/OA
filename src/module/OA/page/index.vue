@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <header-vue name="中国医疗传媒集团"></header-vue>
+    <header-vue name="执与生物科技" :showBack="false"></header-vue>
     <div class="container" ref="container">
       <div class="banner">
         <img v-lazy="img" />
@@ -56,20 +56,20 @@
           </ul>
         </div> -->
         <div class="finance">
-          <h2><img src="../../../assets/images/finance.png" /></h2>
+          <h2>财务管理</h2>
           <ul>
             <li>
               <h3>报销</h3>
               <div>
                 <router-link tag="div" to="/reimburse-apply">
                   <div>
-                    <img src="../../../assets/images/reimburse-apply.png" />
+                    <img src="../../../assets/images/5.png" />
                   </div>
                   <span>申请</span>
                 </router-link>
                 <router-link tag="div" to="/reimburse-approval">
                   <div>
-                    <img src="../../../assets/images/reimburse-approve.png" />
+                    <img src="../../../assets/images/6.png" />
                     <i v-show="data.billCount"></i>
                   </div>
                   <span>审批</span>
@@ -81,13 +81,13 @@
               <div>
                 <router-link tag="div" to="/fund-apply">
                   <div>
-                    <img src="../../../assets/images/borrow-apply.png" />
+                    <img src="../../../assets/images/7.png" />
                   </div>
                   <span>申请</span>
                 </router-link>
                 <router-link tag="div" to="/fund-approval">
                   <div>
-                    <img src="../../../assets/images/borrow-approve.png" />
+                    <img src="../../../assets/images/8.png" />
                     <i v-show="data.fundsCount"></i>
                   </div>
                   <span>审批</span>
@@ -99,13 +99,13 @@
               <div>
                 <router-link tag="div" to="/fixed-apply">
                   <div>
-                    <img src="../../../assets/images/property-apply.png" />
+                    <img src="../../../assets/images/9.png" />
                   </div>
                   <span>申请</span>
                 </router-link>
                 <router-link tag="div" to="/fixed-approval">
                   <div>
-                    <img src="../../../assets/images/property-approve.png" />
+                    <img src="../../../assets/images/10.png" />
                     <i v-show="data.assetsCount"></i>
                   </div>
                   <span>审批</span>
@@ -117,13 +117,13 @@
               <div>
                 <router-link tag="div" to="/project-apply">
                   <div>
-                    <img src="../../../assets/images/project-apply.png" />
+                    <img src="../../../assets/images/11.png" />
                   </div>
                   <span>申请记录</span>
                 </router-link>
                 <router-link tag="div" to="/project-approval">
                   <div>
-                    <img src="../../../assets/images/project-approve.png" />
+                    <img src="../../../assets/images/12.png" />
                     <i v-show="data.itemCount"></i>
                   </div>
                   <span>审批</span>
@@ -134,20 +134,20 @@
         </div>
 
         <div class="erp">
-          <h2><img src="../../../assets/images/ERP.png" /></h2>
+          <h2>资质管理</h2>
           <ul>
             <li>
               <h3>盖章</h3>
               <div>
                 <router-link tag="div" to="/useChapter-apply">
                   <div>
-                    <img src="../../../assets/images/chapter-apply.png" />
+                    <img src="../../../assets/images/13.png" />
                   </div>
                   <span>申请</span>
                 </router-link>
                 <router-link tag="div" to="/useChapter-approval">
                   <div>
-                    <img src="../../../assets/images/chapter-approve.png" />
+                    <img src="../../../assets/images/14.png" />
                     <i v-show="data.sealCount"></i>
                   </div>
                   <span>审批</span>
@@ -159,15 +159,13 @@
               <div>
                 <router-link tag="div" to="/qualificationLoan-apply">
                   <div>
-                    <img src="../../../assets/images/qualification-apply.png" />
+                    <img src="../../../assets/images/15.png" />
                   </div>
                   <span>申请</span>
                 </router-link>
                 <router-link tag="div" to="/qualificationLoan-approval">
                   <div>
-                    <img
-                      src="../../../assets/images/qualification-approve.png"
-                    />
+                    <img src="../../../assets/images/16.png" />
                     <i v-show="data.licenseCount"></i>
                   </div>
                   <span>审批</span>
@@ -179,13 +177,13 @@
               <div>
                 <router-link tag="div" to="/stampChapter-apply">
                   <div>
-                    <img src="../../../assets/images/stamp-apply.png" />
+                    <img src="../../../assets/images/17.png" />
                   </div>
                   <span>申请</span>
                 </router-link>
                 <router-link tag="div" to="/stampChapter-approval">
                   <div>
-                    <img src="../../../assets/images/stamp-approve.png" />
+                    <img src="../../../assets/images/18.png" />
                     <i v-show="data.borrowCount"></i>
                   </div>
                   <span>审批</span>
@@ -210,7 +208,7 @@
         </div>
 
         <div class="dispatch">
-          <h2><img src="../../../assets/images/finance.png" /></h2>
+          <h2>派工管理</h2>
           <ul>
             <li>
               <h3>派工</h3>
@@ -223,10 +221,34 @@
                 </router-link> -->
                 <router-link tag="div" to="/dispatch">
                   <div>
-                    <img src="../../../assets/images/reimburse-approve.png" />
-                    <i v-show="data.billCount"></i>
+                    <img src="../../../assets/images/19.png" />
+                    <!-- <i v-show="data.billCount"></i> -->
                   </div>
-                  <span>派工列表</span>
+                  <span>派工</span>
+                </router-link>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="train">
+          <h2>培训管理</h2>
+          <ul>
+            <li>
+              <h3>培训</h3>
+              <div>
+                <!-- <router-link tag="div" to="/reimburse-apply">
+                  <div>
+                    <img src="../../../assets/images/reimburse-apply.png" />
+                  </div>
+                  <span>申请</span>
+                </router-link> -->
+                <router-link tag="div" to="/dispatch">
+                  <div>
+                    <img src="../../../assets/images/20.png" />
+                    <!-- <i v-show="data.billCount"></i> -->
+                  </div>
+                  <span>培训</span>
                 </router-link>
               </div>
             </li>
@@ -240,43 +262,43 @@
 <script>
   import headerVue from "../components/header/header.vue";
   import { _getData } from "../service/getData";
-  import { mapMutations } from 'vuex';
-  let img = require('../../../../static/images/banner.png');
+  import { mapMutations } from "vuex";
+  let img = require("../../../../static/images/banner@2x.png");
   export default {
     data() {
       return {
         img,
         scrollTop: 0,
         count: 0,
-        data: {}
+        data: {},
       };
     },
     components: {
-      headerVue
+      headerVue,
     },
     methods: {
-      ...mapMutations(["setTransition"])
+      ...mapMutations(["setTransition"]),
     },
     activated() {
-      _getData("backLog/AllAuditCount", {}).then(data => {
+      _getData("backLog/AllAuditCount", {}).then((data) => {
         console.log("统计：：：", data);
         this.count = data.backLogCount;
         this.data = data;
       });
-    }
-    // beforeRouteLeave(to, from, next) {
-    //   console.log(to);
-    //   this.setTransition("turn-on");
-    //   this.scrollTop = this.$refs.container.scrollTop;
-    //   next();
-    // },
-    // beforeRouteEnter(to, from, next) {
-    //   next(vm => {
-    //     if (from.path) {
-    //       vm.$refs.container.scrollTop = vm.scrollTop;
-    //     }
-    //   });
-    // }
+    },
+    beforeRouteLeave(to, from, next) {
+      console.log(to);
+      this.setTransition("turn-on");
+      this.scrollTop = this.$refs.container.scrollTop;
+      next();
+    },
+    beforeRouteEnter(to, from, next) {
+      next((vm) => {
+        if (from.path) {
+          vm.$refs.container.scrollTop = vm.scrollTop;
+        }
+      });
+    },
   };
 </script>
 
@@ -341,12 +363,15 @@
       .main {
         padding-top: 0.5px;
         h2 {
-          height: 26px;
+          height: 43px;
+          background: url("../../../assets/images/1.png") no-repeat center;
+          background-size: 211px 100%;
           margin-top: 10px;
           margin-bottom: 27px;
-          font-family: FZZCHJW--GB1-0;
           font-size: 21px;
-          color: #333333;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #000000;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -383,8 +408,8 @@
               justify-content: space-between;
               > div {
                 > div {
-                  height: 48px;
-                  width: 48px;
+                  height: 56px;
+                  width: 56px;
                   //background: #f4463e;
                   display: flex;
                   justify-content: center;
@@ -408,7 +433,7 @@
                   }
                   img {
                     height: 100%;
-                    width: 48px;
+                    width: 56px;
                   }
                   i {
                     display: flex;
@@ -436,6 +461,24 @@
             }
           }
         }
+        .erp {
+          h2 {
+            background-image: url("../../../assets/images/2.png");
+          }
+        }
+
+        .dispatch {
+          h2 {
+            background-image: url("../../../assets/images/3.png");
+          }
+        }
+
+        .erp {
+          h2 {
+            background-image: url("../../../assets/images/4.png");
+          }
+        }
+
         & > .personnel {
           ul {
             li {
@@ -453,17 +496,17 @@
             li {
               &:first-child {
                 > div {
-                  background: #eaf5ff;
+                  background: rgba(2, 159, 248, 0.05);
                 }
               }
               &:nth-child(2) {
                 > div {
-                  background: #ebfef6;
+                  background: rgba(255, 102, 6, 0.05);
                 }
               }
               &:nth-child(3) {
                 > div {
-                  background: #fffbeb;
+                  background: rgba(254, 171, 8, 0.05);
                 }
               }
               &:last-child {
@@ -479,7 +522,7 @@
             li {
               &:nth-child(1) {
                 > div {
-                  background: #fef6ed;
+                  background: rgba(253, 79, 195, 0.04);
                 }
               }
               &:nth-child(2) {
@@ -489,7 +532,29 @@
               }
               &:nth-child(3) {
                 > div {
-                  background: #eaf5ff;
+                  background: #fef6ed;
+                }
+              }
+            }
+          }
+        }
+        & > .dispatch {
+          ul {
+            li {
+              &:nth-child(1) {
+                > div {
+                  background: #f1f9fe;
+                }
+              }
+            }
+          }
+        }
+        & > .train {
+          ul {
+            li {
+              &:nth-child(1) {
+                > div {
+                  background: rgba(255, 98, 2, 0.04);
                 }
               }
             }

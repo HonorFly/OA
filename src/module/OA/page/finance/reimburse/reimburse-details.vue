@@ -24,7 +24,7 @@
               <img src="../../../../../assets/images/categories.png" alt=""
             /></span>
             所属分类
-            <i><img src="../../../../../assets/images/red-star.png"/></i>
+            <i><img src="../../../../../assets/images/red-star.png" /></i>
           </h3>
           <div class="btn" v-if="type != 'details'">
             <x-button
@@ -34,7 +34,7 @@
               :key="i"
               @click.native="typeBtnClick(item)"
             >
-              <span>{{ item&&item.substring(0, 2) }}</span>
+              <span>{{ item && item.substring(0, 2) }}</span>
             </x-button>
           </div>
           <div class="btn" v-else>
@@ -52,7 +52,7 @@
               <img src="../../../../../assets/images/off-site-remburse.png" />
             </span>
             异地报销
-            <i><img src="../../../../../assets/images/red-star.png"/></i>
+            <i><img src="../../../../../assets/images/red-star.png" /></i>
           </h3>
           <div class="off-site-box">
             <span
@@ -92,7 +92,7 @@
               <img src="../../../../../assets/images/dispatch.png" width="20" />
             </span>
             派工单号<i v-if="type != 'details'">（选一项填写）</i>
-            <i><img src="../../../../../assets/images/red-star.png"/></i>
+            <i><img src="../../../../../assets/images/red-star.png" /></i>
           </h3>
           <div class="box">
             <!-- 普通派工 -->
@@ -116,8 +116,8 @@
               'dispatchNumber',
               {
                 active: dispatch.sn,
-                errorFocus: dispatchFlag && !dispatch.sn
-              }
+                errorFocus: dispatchFlag && !dispatch.sn,
+              },
             ]"
           >
             {{ dispatch.sn }}
@@ -139,7 +139,7 @@
               <img src="../../../../../assets/images/time.png" alt="" />
             </span>
             费用起止时间
-            <i><img src="../../../../../assets/images/red-star.png"/></i>
+            <i><img src="../../../../../assets/images/red-star.png" /></i>
           </h3>
           <div
             class="select-data"
@@ -173,7 +173,7 @@
               <img src="../../../../../assets/images/explain.png" />
             </span>
             报销单说明
-            <i><img src="../../../../../assets/images/red-star.png"/></i>
+            <i><img src="../../../../../assets/images/red-star.png" /></i>
           </h3>
           <van-field
             type="textarea"
@@ -262,7 +262,7 @@
               <div
                 :class="[
                   'title',
-                  { end: i == 4 && item.billApplyItemList.length == 0 }
+                  { end: i == 4 && item.billApplyItemList.length == 0 },
                 ]"
                 v-if="type != 'details' || item.billApplyItemList.length"
               >
@@ -353,6 +353,7 @@
       :data="details"
       type="reimburse"
     ></footer-approve-button-vue>
+    <van-calendar v-model="show" type="range" @confirm="onConfirm" />
   </div>
 </template>
 
@@ -408,7 +409,7 @@
         dispatchFlag: false,
         belongProjectFlag: false,
         isShowfooterApproval: false,
-        judgeBack: false
+        judgeBack: false,
       };
     },
     props: ["type", "name", "isApproval"],
@@ -419,7 +420,7 @@
         if (newVal != "details") {
           this.judgeBack = true;
         }
-      }
+      },
     },
     activated() {
       // this.judgeBack = false;
@@ -627,8 +628,8 @@
             .confirm({
               message: "您填的内容没保存,确定返回吗?",
               overlayStyle: {
-                background: "rgba(0,0,0,0.30)"
-              }
+                background: "rgba(0,0,0,0.30)",
+              },
             })
             .then(() => {
               this.$store.commit("setTransition", "turn-off");
@@ -676,8 +677,8 @@
             index: this.type == "apply" || this.type == "edit" ? i : "",
             data: JSON.stringify(val),
             fromDate: this.fromDate,
-            endDate: this.endDate
-          }
+            endDate: this.endDate,
+          },
         });
       },
       input(name, val) {
@@ -696,7 +697,7 @@
         console.log(billApplyItemList);
         var fileStr = "",
           fileName = "";
-        _.each(this.file, o => {
+        _.each(this.file, (o) => {
           console.log(o);
           fileStr = fileStr + o.url + ",";
           fileName = fileName + o.name + ",";
@@ -727,7 +728,7 @@
           ifNonlocal: this.ifNonlocal, //是否异地
           checkUsers: "", //类型：审批人ID组
           billCheckList: this.details.billApplyCheckEntityList || [],
-          billApplyExpenseList: billApplyItemList
+          billApplyExpenseList: billApplyItemList,
         };
         if (val == "cancel") {
           //撤销接口
@@ -739,7 +740,7 @@
             return;
           } else {
             this.$route.params.path = "saveBtn";
-            _getData("billApply/saveBillApply", data).then(data => {
+            _getData("billApply/saveBillApply", data).then((data) => {
               // console.log("保存：", data);
               this.$toast("保存成功");
               this.$router.go(-1);
@@ -795,7 +796,7 @@
           } else {
             this.$router.push({
               path: "/select-approver-list",
-              query: { type: "reimburse", details: JSON.stringify(data) }
+              query: { type: "reimburse", details: JSON.stringify(data) },
             });
           }
         }
@@ -822,8 +823,8 @@
                 type: "add",
                 name: this.name,
                 fromDate: this.fromDate,
-                endDate: this.endDate
-              }
+                endDate: this.endDate,
+              },
             });
             break;
           case 1:
@@ -835,8 +836,8 @@
                 name: this.name,
                 typeName: item.typeName,
                 fromDate: this.fromDate,
-                endDate: this.endDate
-              }
+                endDate: this.endDate,
+              },
             });
             break;
           case 2:
@@ -847,8 +848,8 @@
                 type: "add",
                 name: this.name,
                 fromDate: this.fromDate,
-                endDate: this.endDate
-              }
+                endDate: this.endDate,
+              },
             });
             break;
           case 3:
@@ -859,8 +860,8 @@
                 type: "add",
                 name: this.name,
                 fromDate: this.fromDate,
-                endDate: this.endDate
-              }
+                endDate: this.endDate,
+              },
             });
             break;
           case 4:
@@ -871,12 +872,12 @@
                 type: "add",
                 name: this.name,
                 fromDate: this.fromDate,
-                endDate: this.endDate
-              }
+                endDate: this.endDate,
+              },
             });
             break;
         }
-      }
+      },
     },
     components: {
       headerVue,
@@ -888,8 +889,8 @@
       applicationDispatchVue,
       commonDispatchVue,
       footerApproveButtonVue,
-      fundNumberVue
-    }
+      fundNumberVue,
+    },
   };
 </script>
 

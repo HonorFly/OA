@@ -21,7 +21,7 @@
     provide() {
       //父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
       return {
-        reload: this.reload
+        reload: this.reload,
       };
     },
 
@@ -35,7 +35,7 @@
         } else {
           return "ios";
         }
-      }
+      },
     },
     methods: {
       reload() {
@@ -43,7 +43,7 @@
         this.$nextTick(() => {
           this.isRouterAlive = true; //再打开
         });
-      }
+      },
     },
     mounted() {
       // var height = document.getElementById("app").clientHeight;
@@ -51,7 +51,7 @@
       //监听浏览器返回事件
       window.addEventListener(
         "popstate",
-        e => {
+        (e) => {
           if (this.$route.params.path != "saveBtn") {
             this.$store.commit("setTransition", "turn-off");
           }
@@ -59,24 +59,24 @@
         false
       );
       console.log(this.$router.currentRoute);
-      window.WebViewJavascriptBridge.registerHandler(
-        "androidPhysicalBack",
-        (data, responseCallback) => {
-          if (
-            this.$router.currentRoute.path == "/" ||
-            this.$route.query.fromNative == 1 ||
-            getUrlParam("fromNative") == 2
-          ) {
-            responseCallback({ isNativeBack: "true" });
-          } else {
-            this.$store.commit("setTransition", "turn-off");
-            this.$router.back();
-          }
-        }
-      );
+      // window.WebViewJavascriptBridge.registerHandler(
+      //   "androidPhysicalBack",
+      //   (data, responseCallback) => {
+      //     if (
+      //       this.$router.currentRoute.path == "/" ||
+      //       this.$route.query.fromNative == 1 ||
+      //       getUrlParam("fromNative") == 2
+      //     ) {
+      //       responseCallback({ isNativeBack: "true" });
+      //     } else {
+      //       this.$store.commit("setTransition", "turn-off");
+      //       this.$router.back();
+      //     }
+      //   }
+      // );
       //监听键盘收起事件
       window.addEventListener("focusout", () => {});
-    }
+    },
   };
 </script>
 
@@ -370,6 +370,9 @@
 
   .van-toast {
     z-index: 10000 !important;
+  }
+  .van-dialog {
+    height: auto !important;
   }
   .vux-loading {
     .weui-mask_transparent {

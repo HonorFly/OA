@@ -13,7 +13,7 @@
           </div>
           <div class="swiper-slide" @click="openFullscreenDialog(1)">
             <div slot="title" class="title">
-              <span><img src="../../../../assets/images/screen.png"/></span>
+              <span><img src="../../../../assets/images/screen.png" /></span>
               筛选
             </div>
           </div>
@@ -289,8 +289,8 @@
           pullDownRefresh: false,
           pullUpLoad: {
             txt: { noMore: "全部数据加载完毕" },
-            visible: true
-          }
+            visible: true,
+          },
         },
         bar: false,
         currentPage: 1, //当前页
@@ -301,7 +301,7 @@
         activeIndex: 0,
         index: 0,
         typeIndex: 0,
-        placeholder: ""
+        placeholder: "",
       };
     },
     components: {
@@ -313,26 +313,26 @@
       qualificationItemVue,
       stampChapterItemVue,
       projectItemVue,
-      dispatchItemVue
+      dispatchItemVue,
     },
     props: {
       recordList: {
         type: Array,
-        default: []
+        default: [],
       },
       pageCount: {
         //总页数
-        type: Number
+        type: Number,
       },
       getData: {},
       type: {
         //类型
-        type: String
+        type: String,
       },
       isInit: { type: Boolean, default: false },
       isBackLog: { type: Boolean, default: false },
       isApproval: { type: Boolean, default: false },
-      isShowfooterApproval: { type: Boolean, default: false }
+      isShowfooterApproval: { type: Boolean, default: false },
     },
     watch: {
       recordList(newVal) {
@@ -342,7 +342,7 @@
       currentPage(newVal) {
         if (newVal == 1 && newVal < this.pageCount)
           this.$refs.scroll.resetPullUpTxt();
-      }
+      },
     },
     mounted() {
       switch (this.type) {
@@ -374,6 +374,9 @@
           this.placeholder = "搜索申请人名称、所属公司";
           this.getTypeData("category/getCategory", "3", "703", "item");
           break;
+        case "dispatch":
+          this.getDispatchType();
+          break;
         default:
           this.placeholder = "搜索申请人名称、所属公司";
           this.allTypeData = [
@@ -384,7 +387,7 @@
             "盖章",
             "借章",
             "公司资质",
-            "项目"
+            "项目",
           ];
           this.filterData = [0];
           break;
@@ -408,6 +411,14 @@
       this.bar = false;
     },
     methods: {
+      async getDispatchType() {
+        await _getData("wordbook/getWordBookList", { code: "Dispatch" }).then(
+          (data) => {
+            console.log("获取类型", data);
+            this.allTypeData = data;
+          }
+        );
+      },
       search(val) {
         this.openFullscreen1 = false;
         this.bar = false;
@@ -424,9 +435,10 @@
         this.allSelect = true;
       },
       clickHandle(item) {
-        let select = _.find(this.filterData, o => {
+        let select = _.find(this.filterData, (o) => {
           return o == item;
         });
+
         if (select) {
           this.filterData = _.without(this.filterData, select);
         } else {
@@ -510,7 +522,7 @@
         this.bar = false;
         this.$emit("sureClick", {
           filterData: this.filterData,
-          state: this.index || ""
+          state: this.index || "",
         });
       },
       closeFullscreenDialog() {
@@ -525,21 +537,21 @@
         this.$dialog.confirm({
           message: "确认删除全部历史记录？",
           overlayStyle: {
-            background: "rgba(0,0,0,0.30)"
-          }
+            background: "rgba(0,0,0,0.30)",
+          },
         });
       },
       async getTypeData(url, type, parentId, typeName) {
         await _getData(url, {
           type: type,
           parentId: parentId,
-          typeName: typeName
-        }).then(data => {
+          typeName: typeName,
+        }).then((data) => {
           console.log("获取类型", data);
           this.allTypeData = data;
         });
-      }
-    }
+      },
+    },
   };
 </script>
 

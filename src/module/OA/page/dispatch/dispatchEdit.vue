@@ -15,7 +15,7 @@
             </span>
             派工单号
           </h3>
-          <span>{{details.sn}}</span>
+          <span>{{ details.sn }}</span>
         </div>
         <div class="common description">
           <h3>
@@ -75,14 +75,14 @@
         </div>
         <div class="applyReason">
           <h3>
-            <span><img src="../../../../assets/images/explain.png"/></span>
+            <span><img src="../../../../assets/images/explain.png" /></span>
             备注
           </h3>
           <van-field
             ref="note"
             :class="{
               selected: details.note,
-              errorFocus: noteFlag && !details.note
+              errorFocus: noteFlag && !details.note,
             }"
             v-model="details.note"
             placeholder="请输入备注"
@@ -99,46 +99,45 @@
             服务时间
           </h3>
           <ul>
-            <service-time-vue v-for="(item,index) in dispatchItem" :key="index" :data="dispatchItem" :index="index" @handle="clickHandle"></service-time-vue>
+            <service-time-vue
+              v-for="(item, index) in dispatchItem"
+              :key="index"
+              :data="dispatchItem"
+              :index="index"
+              @handle="clickHandle"
+            ></service-time-vue>
           </ul>
         </div>
       </div>
     </div>
-    <footer-cancel-submit-vue
-      @submit="submit"
-      :data="details"
-      :type="type"
-      :submitFlag="submitFlag"
-      v-if="!isApproval"
-    ></footer-cancel-submit-vue>
+    <footer-cancel-submit-vue @submit="submit"></footer-cancel-submit-vue>
   </div>
 </template>
 
 <script>
   import headerVue from "../../components/header/header.vue";
-  import footerCancelSubmitVue from "../../components/footer/footer-cancel-submit";
+  import footerCancelSubmitVue from "../../components/footer/footer-save";
   import costTypeVue from "../../components/common/cost-type.vue";
-   import uploadImageVue from "../../components/common/upload-image.vue";
-   import serviceTimeVue from "../../components/common/serviceTime.vue";
+  import uploadImageVue from "../../components/common/upload-image.vue";
+  import serviceTimeVue from "../../components/common/serviceTime.vue";
   import { _getData } from "../../service/getData";
   import { mapMutations } from "vuex";
   import { getDay, iosKeyboard } from "../../components/mixins/mixins";
 
-
   export default {
     data() {
       return {
-        dispatchItem:[],
+        dispatchItem: [],
         file: [],
         fileList: [],
-        content:"鹏哥哥在帝豪包间全套服务一次",
-        desc:"鹏哥宝刀不老",
+        content: "",
+        desc: "",
         details: {},
         picker1: null, //所属公司
         number: "", //申请数量
         noteFlag: false,
         submitFlag: false,
-        scrollTop: 0
+        scrollTop: 0,
       };
     },
     mixins: [getDay, iosKeyboard],
@@ -147,15 +146,15 @@
       this.scrollTop = 0;
       this.details = {};
       this.noteFlag = false;
-      this.getDispatchDetail()
+      this.getDispatchDetail();
     },
     methods: {
       ...mapMutations(["setTransition"]),
-      clickHandle(val){
-        if(val==='add'){
-          this.dispatchItem.push(this.dispatchItem.length+1)
-        }else{
-          this.dispatchItem.pop()
+      clickHandle(val) {
+        if (val === "add") {
+          this.dispatchItem.push(this.dispatchItem.length + 1);
+        } else {
+          this.dispatchItem.pop();
         }
       },
       submit(val) {
@@ -169,7 +168,7 @@
               person: "",
               tel: "",
               adr: "",
-              note: ""
+              note: "",
             };
           }
 
@@ -195,22 +194,31 @@
       updata(val) {
         this.file = val;
       },
-      getDispatchDetail(){
-         _getData("dispatch/getDispatch",{id:"1"||this.$route.query.id}).then(res=>{
-           console.log("详情：：：",res)
-           this.details = res.dispatch || {};
-           res.dispatchItem.push({fromTime:"",endTime:"",hours:"",traveHours:""});
+      getDispatchDetail() {
+        _getData("dispatch/getDispatch", {
+          id: "1" || this.$route.query.id,
+        }).then((res) => {
+          console.log("详情：：：", res);
+          this.details = res.dispatch || {};
+          this.dispatchItem = res.dispatchItem;
+          if (this.dispatchItem.length) return;
+          res.dispatchItem.push({
+            fromTime: "",
+            endTime: "",
+            hours: "",
+            traveHours: "",
+          });
           //  console.log(res.dispatchItem)
-           this.dispatchItem =res.dispatchItem;
-         })
-      }
+        });
+      },
     },
     components: {
       headerVue,
       costTypeVue,
       footerCancelSubmitVue,
-      uploadImageVue,serviceTimeVue
-    }
+      uploadImageVue,
+      serviceTimeVue,
+    },
   };
 </script>
 
@@ -293,7 +301,7 @@
             }
           }
         }
-        .common{
+        .common {
           margin-bottom: 10px;
           .van-cell {
             min-height: 46px;
@@ -312,13 +320,19 @@
             }
           }
         }
-        .number{
+        .number {
           display: flex;
           justify-content: space-between;
-          span{
+          span {
             font-size: 17px;
             font-weight: bold;
-            background-image: -webkit-gradient(linear,left 0,right 0,from(rgba(241, 2, 21, 1)),to(rgba(255, 137, 28, 1)));
+            background-image: -webkit-gradient(
+              linear,
+              left 0,
+              right 0,
+              from(rgba(241, 2, 21, 1)),
+              to(rgba(255, 137, 28, 1))
+            );
             -webkit-background-clip: text; /*必需加前缀 -webkit- 才支持这个text值 */
             -webkit-text-fill-color: transparent; /*text-fill-color会覆盖color所定义的字体颜色： */
           }

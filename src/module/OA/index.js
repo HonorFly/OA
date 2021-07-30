@@ -28,6 +28,7 @@ import {
   CollapseItem,
   Field,
   Cell,
+  Calendar,
   CellGroup,
   Uploader,
   Loading as vanLoading,
@@ -51,7 +52,8 @@ Vue.use(Tab)
   .use(Skeleton)
   .use(Tabbar)
   .use(TabbarItem)
-  .use(vanLoading);
+  .use(vanLoading)
+  .use(Calendar);
 
 import { Dialog as muDialog, Breadcrumbs, Avatar } from "muse-ui";
 import "muse-ui/dist/muse-ui.css";
@@ -63,7 +65,7 @@ import VueScroller from "vue-scroller";
 import { XButton, XTextarea, XNumber, Loading, Confirm } from "vux";
 import FastClick from "fastclick";
 import Cube, {
-//Toast,
+  //Toast,
   Dialog,
   Textarea,
   //ImagePreview,
@@ -180,14 +182,15 @@ const initVueApp = () => {
     template: "<App/>"
   });
 };
+initVueApp();
 
 // 第一连接时初始化bridage
-if (Util.isAndroid()) {
-  new connectWebViewJavascriptBridge(function(bridge) {
-    initVueApp();
-  });
-} else {
-  new setupWebViewJavascriptBridge(function(bridge) {
-    initVueApp(); // vue 实例
-  });
-}
+// if (Util.isAndroid()) {
+//   new connectWebViewJavascriptBridge(function(bridge) {
+//     initVueApp();
+//   });
+// } else {
+//   new setupWebViewJavascriptBridge(function(bridge) {
+//     initVueApp(); // vue 实例
+//   });
+// }
