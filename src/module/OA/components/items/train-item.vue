@@ -1,30 +1,30 @@
 <template>
-  <li class="dispatch-item" @click="handleClick(data.id)">
+  <li class="dispatch-item" @click="handleClick(data)">
     <div class="main">
       <ul>
         <li>
-          <span>派工单号</span><i>{{ data.sn }}</i>
+          <span>课程名称</span><i>{{ data.title }}</i>
         </li>
         <li>
           <div class="leftLay">
-            <span>维修类型</span><i>{{ data.repairType }}</i>
+            <span>培训类别</span><i>{{ data.trainType }}</i>
           </div>
           <div class="rightLay">
-            <span>工程师</span><i>{{ data.engineerName }}</i>
+            <span>讲师</span><i>{{ data.trainTeacher }}</i>
           </div>
         </li>
+        <li><span>课程说明</span><i v-html="data.content"></i></li>
         <li>
           <div class="leftLay">
-            <span>开单时间</span><i>{{ data.dispatchTime }}</i>
+            <span>开始时间</span><i>{{ data.trainFromTime }}</i>
           </div>
           <div class="rightLay">
-            <span>开单人</span><i>{{ data.fullName }}</i>
+            <span>结束时间</span><i>{{ data.trainEndTime }}</i>
           </div>
         </li>
       </ul>
-      <div class="info">服务信息</div>
-      <span>{{ data.itemType || data.type }}</span>
-      <item-status-vue :status="0"></item-status-vue>
+
+      <!-- <item-status-vue :status="0"></item-status-vue> -->
     </div>
   </li>
 </template>
@@ -57,15 +57,12 @@
     components: { itemStatusVue },
     methods: {
       ...mapMutations(["setTransition"]),
-      handleClick(id) {
+      handleClick({ id, courseware }) {
         this.setTransition("turn-on");
         this.$router.push({
-          path: "/dispatch-edit",
+          path: "/train-video",
           query: {
-            type: "details",
-            id,
-            isApproval: this.isApproval,
-            isShowfooterApproval: this.isShowfooterApproval,
+            url: courseware,
           },
         });
       },

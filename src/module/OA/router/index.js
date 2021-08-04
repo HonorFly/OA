@@ -217,6 +217,25 @@ const router = new Router({
       component: () => import("../page/dispatch/dispatchEdit.vue")
     },
     {
+      path: "/train",
+      name: "培训列表",
+      props: route => ({
+        type: route.query.type,
+        name: route.query.fundName,
+        isApproval: route.query.isApproval || false
+      }),
+      component: () => import("../page/train/train-list.vue")
+    },
+    {
+      path: "/train-video",
+      name: "培训详情",
+      props: route => ({
+        id: route.query.id,
+        url: route.query.url
+      }),
+      component: () => import("../page/train/train-video")
+    },
+    {
       path: "/select-approver-list",
       name: "选择审批人列表",
       props: route => ({
@@ -233,19 +252,25 @@ const router = new Router({
           path: "/",
           name: "集团架构",
           component: () =>
-            import("../page/selectApprover/select-approve-children/group-structure.vue")
+            import(
+              "../page/selectApprover/select-approve-children/group-structure.vue"
+            )
         },
         {
           path: "department",
           name: "部门列表",
           component: () =>
-            import("../page/selectApprover/select-approve-children/department.vue")
+            import(
+              "../page/selectApprover/select-approve-children/department.vue"
+            )
         },
         {
           path: "co-worker",
           name: "同事列表",
           component: () =>
-            import("../page/selectApprover/select-approve-children/co-worker.vue")
+            import(
+              "../page/selectApprover/select-approve-children/co-worker.vue"
+            )
         }
       ]
     },

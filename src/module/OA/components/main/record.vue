@@ -172,6 +172,7 @@
                 @agreeOrRefuse="$emit('agreeOrRefuse')"
               ></project-item-vue>
             </ul>
+            <!-- 派工 -->
             <ul v-else-if="type == 'dispatch'">
               <dispatch-item-vue
                 v-for="item in recordList"
@@ -182,6 +183,19 @@
                 :isShowfooterApproval="isShowfooterApproval"
                 @agreeOrRefuse="$emit('agreeOrRefuse')"
               ></dispatch-item-vue>
+            </ul>
+            <!-- 培训 -->
+            <ul v-else-if="type == 'train'">
+              <train-item-vue
+                v-for="item in recordList"
+                :key="item.id"
+                :showBtn="true"
+                :data="item"
+                :isApproval="isApproval"
+                :isShowfooterApproval="isShowfooterApproval"
+                @agreeOrRefuse="$emit('agreeOrRefuse')"
+              >
+              </train-item-vue>
             </ul>
           </div>
         </div>
@@ -275,8 +289,10 @@
   import qualificationItemVue from "../items/qualification-loan-item.vue";
   import projectItemVue from "../items/project-item.vue";
   import dispatchItemVue from "../items/dispatch-item.vue";
+
   import { _getData } from "../../service/getData";
   import _ from "lodash";
+  import trainItemVue from "../items/train-item.vue";
 
   export default {
     data() {
@@ -314,6 +330,7 @@
       stampChapterItemVue,
       projectItemVue,
       dispatchItemVue,
+      trainItemVue,
     },
     props: {
       recordList: {
@@ -376,6 +393,9 @@
           break;
         case "dispatch":
           this.getDispatchType();
+          break;
+        case "train":
+          this.allTypeData = [{ wordBook: "线上" }, { wordBook: "线下" }];
           break;
         default:
           this.placeholder = "搜索申请人名称、所属公司";
