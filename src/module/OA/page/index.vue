@@ -1,6 +1,8 @@
 <template>
   <div id="index">
-    <header-vue name="执与生物科技" :showBack="false"></header-vue>
+    <header-vue name="执与生物科技" :showBack="false">
+       <van-icon name="user-o" @click="openFullscreen = true"/>
+    </header-vue>
     <div class="container" ref="container">
       <div class="banner">
         <img v-lazy="img" />
@@ -255,6 +257,26 @@
           </ul>
         </div>
       </div>
+      <mu-dialog
+        transition="slide-right"
+        :open.sync="openFullscreen"
+      >
+         <div class="container">
+            <div class="headerImg">
+              <img src="@/assets/images/8.png" alt="logo">
+            </div>
+            <div class="userName">刘鹏</div>
+            <div class="content">
+              <ul>
+                <li>版本 1.0.0</li>
+                <li @click="cacheHandle">清理缓存</li>
+              </ul>
+            </div>
+            <div class="footer" @click="window.command.loginOut('s')">
+              退出登录
+            </div>
+        </div>
+      </mu-dialog>
     </div>
   </div>
 </template>
@@ -271,6 +293,7 @@
         scrollTop: 0,
         count: 0,
         data: {},
+        openFullscreen:false
       };
     },
     components: {
@@ -278,6 +301,9 @@
     },
     methods: {
       ...mapMutations(["setTransition"]),
+      cacheHandle(){
+        this.$toast('清理成功');
+      }
     },
     activated() {
       _getData("backLog/AllAuditCount", {}).then((data) => {
@@ -562,5 +588,74 @@
         }
       }
     }
+
   }
+   /deep/ #header{
+       .quit{
+        justify-content: center;
+        align-items: center;
+      }
+    }
+     .mu-dialog-wrapper{
+      justify-content: flex-end;
+     /deep/  .mu-dialog{
+         width: 75%;
+         height: 100%;
+         .mu-dialog-body{
+           width: 100%;
+           height: 100%;
+           padding: 0;
+           .container{
+             width: 100%;
+             height: 100%;
+             background-color: #fff;
+           }
+         }
+         .headerImg{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            img{
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+            }
+          }
+          .userName{
+            display: flex;
+            justify-content: center;
+            height: 76px;
+          }
+          .content{
+            padding: 0 13px;
+            margin-bottom:30px;
+            ul{
+              li{
+                width: 100%;
+                height: 46px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 16px;
+                color: #666;
+              }
+            }
+          }
+          .footer{
+            height: 46px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #40A9FF;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+          }
+      }
+    }
+</style>
+<style>
+   .van-toast{
+      z-index: 99999999 !important;
+    }
 </style>

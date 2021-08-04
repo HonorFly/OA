@@ -21,6 +21,7 @@
         编辑
       </span>
       <span v-if="isDelete" @click="delClick"> 删除 </span>
+      <slot></slot>
     </span>
     <!-- <div class="placeholder"></div> -->
   </div>

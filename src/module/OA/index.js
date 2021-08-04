@@ -18,6 +18,7 @@ import {
   setupWebViewJavascriptBridge
 } from "../../common/js/jsBridge";
 import {
+  Icon,
   Lazyload,
   Toast,
   Search,
@@ -53,7 +54,7 @@ Vue.use(Tab)
   .use(Tabbar)
   .use(TabbarItem)
   .use(vanLoading)
-  .use(Calendar);
+  .use(Calendar).use(Icon);
 
 import { Dialog as muDialog, Breadcrumbs, Avatar } from "muse-ui";
 import "muse-ui/dist/muse-ui.css";
@@ -145,13 +146,6 @@ Vue.use(Vuex)
   .use(Toast)
   .use(Search)
   .use(Picker);
-// .use(VueTouchRipple, {
-//     // default global options
-//     color: '#999',
-//     opacity: 0.3,
-//     speed: 1,
-//     transition: 'ease'
-// })
 
 Vue.use(VueScroller);
 Vue.use(Lazyload, {

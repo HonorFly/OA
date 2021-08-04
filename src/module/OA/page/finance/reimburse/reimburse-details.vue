@@ -423,18 +423,18 @@
       },
     },
     activated() {
-      // this.judgeBack = false;
-      // _getData("financeFunds/IfPayedFundsList", {
-      //   currentPage: 1,
-      //   countPerPage: ""
-      // }).then(data => {
-      //   this.column1 = _.map(data.data, v => {
-      //     return { text: v.sn, value: v.sn, id: v.id };
-      //   });
-      // });
-      // if (this.type != "details") {
-      //   this.judgeBack = true;
-      // }
+      this.judgeBack = false;
+      _getData("financeFunds/IfPayedFundsList", {
+        currentPage: 1,
+        countPerPage: ""
+      }).then(data => {
+        this.column1 = _.map(data.data, v => {
+          return { text: v.sn, value: v.sn, id: v.id };
+        });
+      });
+      if (this.type != "details") {
+        this.judgeBack = true;
+      }
     },
     beforeRouteLeave(to, from, next) {
       this.scrollTop = this.$refs.container.scrollTop;
@@ -453,173 +453,173 @@
         (this.$refs.applicationDispatch.openFullscreen = false);
       next();
     },
-    // beforeRouteEnter(to, from, next) {
-    //   console.log(from);
-    //   if (from.path == "/select-approver-list" || _.endsWith(from.path, "cost")) {
-    //     to.meta.isBack = true;
-    //   } else {
-    //     to.meta.isBack = false;
-    //   }
-    //   next(vm => {
-    //     vm.$refs.belong.companyActive = false;
-    //     vm.$refs.belong.costActive = false;
-    //     vm.$refs.odd && vm.$refs.odd.$el.classList.remove("errorFocus");
-    //     vm.$refs.time.classList.remove("errorFocus");
-    //     vm.$refs.explain.$el.classList.remove("errorFocus");
-    //     if (
-    //       _.endsWith(from.path, "cost") ||
-    //       from.path == "/select-approver-list"
-    //     ) {
-    //       vm.$refs.container.scrollTop = vm.scrollTop;
-    //     } else {
-    //       vm.details = {};
-    //       vm.project = {};
-    //       vm.dispatch = {};
-    //       vm.loanNote = {};
-    //       vm.value = "";
-    //       vm.sn = "";
-    //       vm.ifNonlocal = "否";
-    //       vm.oddId = "";
-    //       vm.fileList = [];
-    //       vm.file = [];
-    //       vm.fromDate = "";
-    //       vm.endDate = "";
-    //       vm.dayNum = "";
-    //       vm.explainValue = "";
-    //       vm.belongProjectFlag = false;
-    //       vm.dispatchFlag = false;
-    //       vm.dispatchType = "config";
-    //       vm.isShowfooterApproval = false;
-    //       vm.picker1 = null;
-    //       vm.selectedIndex1 = [0];
-    //       vm.typeBtnVal = "A类报销";
-    //       _getData("billApply/getBillApplyInfo", {
-    //         type: vm.name, //类型：String  必有字段  备注：报销类型
-    //         billApplyId: vm.$route.query.id || ""
-    //       }).then(data => {
-    //         vm.countAndSumMoney = data.CountAndSumMoneyEntity;
-    //         vm.totalNum = data.countAndSumMoney;
-    //         vm.totalMoeny = data.countAndSumMoney.amount || 0;
-    //       });
-    //     }
+    beforeRouteEnter(to, from, next) {
+      console.log(from);
+      if (from.path == "/select-approver-list" || _.endsWith(from.path, "cost")) {
+        to.meta.isBack = true;
+      } else {
+        to.meta.isBack = false;
+      }
+      next(vm => {
+        vm.$refs.belong.companyActive = false;
+        vm.$refs.belong.costActive = false;
+        vm.$refs.odd && vm.$refs.odd.$el.classList.remove("errorFocus");
+        vm.$refs.time.classList.remove("errorFocus");
+        vm.$refs.explain.$el.classList.remove("errorFocus");
+        if (
+          _.endsWith(from.path, "cost") ||
+          from.path == "/select-approver-list"
+        ) {
+          vm.$refs.container.scrollTop = vm.scrollTop;
+        } else {
+          vm.details = {};
+          vm.project = {};
+          vm.dispatch = {};
+          vm.loanNote = {};
+          vm.value = "";
+          vm.sn = "";
+          vm.ifNonlocal = "否";
+          vm.oddId = "";
+          vm.fileList = [];
+          vm.file = [];
+          vm.fromDate = "";
+          vm.endDate = "";
+          vm.dayNum = "";
+          vm.explainValue = "";
+          vm.belongProjectFlag = false;
+          vm.dispatchFlag = false;
+          vm.dispatchType = "config";
+          vm.isShowfooterApproval = false;
+          vm.picker1 = null;
+          vm.selectedIndex1 = [0];
+          vm.typeBtnVal = "A类报销";
+          _getData("billApply/getBillApplyInfo", {
+            type: vm.name, //类型：String  必有字段  备注：报销类型
+            billApplyId: vm.$route.query.id || ""
+          }).then(data => {
+            vm.countAndSumMoney = data.CountAndSumMoneyEntity;
+            vm.totalNum = data.countAndSumMoney;
+            vm.totalMoeny = data.countAndSumMoney.amount || 0;
+          });
+        }
 
-    //     if (vm.type != "apply" && !_.endsWith(from.path, "cost")) {
-    //       _getData("billApply/getBillApply", {
-    //         Id: vm.$route.query.id,
-    //         wordBook: vm.name
-    //       }).then(data => {
-    //         console.log("报销单详情：：：", data);
-    //         // console.log("22222222222", userInfo);
-    //         let checkState;
-    //         _.each(data.financeBillLog, o => {
-    //           if (userId == o.checkUser) {
-    //             checkState = o.checkState;
-    //           }
-    //         });
-    //         vm.isShowfooterApproval =
-    //           data.status == 1 && userId != data.applyUser && checkState == 0
-    //             ? true
-    //             : false; //需要判断userid是不是本人
-    //         vm.details = data;
-    //         vm.value = "";
-    //         vm.typeBtnVal = data.classes;
-    //         vm.fromDate = data.fromTime;
-    //         vm.endDate = data.endTime;
-    //         vm.sn = data.sn;
-    //         vm.ifNonlocal = data.ifNonlocal;
-    //         vm.dispatchType = data.dispatchType;
-    //         vm.dispatch = {
-    //           id: data.dispatchId,
-    //           sn:
-    //             data.dispatchType == "config"
-    //               ? data.erpDispatchSn
-    //               : data.trainDispatch
-    //         };
-    //         vm.project = { itemId: data.itemId, itemName: data.itemName };
-    //         vm.loanNote = {
-    //           fundsId: data.fundsId,
-    //           fundsName: data.financeFundsSn
-    //         };
-    //         if (data.file) {
-    //           let file = data.file.split(","),
-    //             name = data.fileName.split(",");
-    //           console.log(file);
-    //           _.each(file, (o, i) => {
-    //             vm.fileList = [
-    //               ...vm.fileList,
-    //               {
-    //                 url: o,
-    //                 name: name[i]
-    //               }
-    //             ];
-    //           });
-    //         }
-    //         console.log(vm.fileList);
-    //         vm.explainValue = data.note;
-    //       });
-    //     }
-    //     //共同处理函数
-    //     const middleware = n => {
-    //       if (from.query.cost) {
-    //         if (from.query.index >= 0) {
-    //           //编辑
-    //           vm.$set(
-    //             vm.countAndSumMoney[n].billApplyItemList,
-    //             from.query.index,
-    //             JSON.parse(from.query.cost)[0]
-    //           );
-    //         } else {
-    //           //新增
-    //           vm.$set(vm.countAndSumMoney[n], "billApplyItemList", [
-    //             ...JSON.parse(from.query.cost),
-    //             ...vm.countAndSumMoney[n].billApplyItemList
-    //           ]);
-    //         }
-    //       } else {
-    //         if (from.query.index >= 0 && from.query.action == "del") {
-    //           vm.countAndSumMoney[n].billApplyItemList.splice(
-    //             from.query.index,
-    //             1
-    //           );
-    //         }
-    //       }
-    //     };
+        if (vm.type != "apply" && !_.endsWith(from.path, "cost")) {
+          _getData("billApply/getBillApply", {
+            Id: vm.$route.query.id,
+            wordBook: vm.name
+          }).then(data => {
+            console.log("报销单详情：：：", data);
+            // console.log("22222222222", userInfo);
+            let checkState;
+            _.each(data.financeBillLog, o => {
+              if (userId == o.checkUser) {
+                checkState = o.checkState;
+              }
+            });
+            vm.isShowfooterApproval =
+              data.status == 1 && userId != data.applyUser && checkState == 0
+                ? true
+                : false; //需要判断userid是不是本人
+            vm.details = data;
+            vm.value = "";
+            vm.typeBtnVal = data.classes;
+            vm.fromDate = data.fromTime;
+            vm.endDate = data.endTime;
+            vm.sn = data.sn;
+            vm.ifNonlocal = data.ifNonlocal;
+            vm.dispatchType = data.dispatchType;
+            vm.dispatch = {
+              id: data.dispatchId,
+              sn:
+                data.dispatchType == "config"
+                  ? data.erpDispatchSn
+                  : data.trainDispatch
+            };
+            vm.project = { itemId: data.itemId, itemName: data.itemName };
+            vm.loanNote = {
+              fundsId: data.fundsId,
+              fundsName: data.financeFundsSn
+            };
+            if (data.file) {
+              let file = data.file.split(","),
+                name = data.fileName.split(",");
+              console.log(file);
+              _.each(file, (o, i) => {
+                vm.fileList = [
+                  ...vm.fileList,
+                  {
+                    url: o,
+                    name: name[i]
+                  }
+                ];
+              });
+            }
+            console.log(vm.fileList);
+            vm.explainValue = data.note;
+          });
+        }
+        //共同处理函数
+        const middleware = n => {
+          if (from.query.cost) {
+            if (from.query.index >= 0) {
+              //编辑
+              vm.$set(
+                vm.countAndSumMoney[n].billApplyItemList,
+                from.query.index,
+                JSON.parse(from.query.cost)[0]
+              );
+            } else {
+              //新增
+              vm.$set(vm.countAndSumMoney[n], "billApplyItemList", [
+                ...JSON.parse(from.query.cost),
+                ...vm.countAndSumMoney[n].billApplyItemList
+              ]);
+            }
+          } else {
+            if (from.query.index >= 0 && from.query.action == "del") {
+              vm.countAndSumMoney[n].billApplyItemList.splice(
+                from.query.index,
+                1
+              );
+            }
+          }
+        };
 
-    //     //办公费用
-    //     if (from.path == "/work-cost") {
-    //       middleware(0);
-    //     }
-    //     //活动费
-    //     if (from.path == "/activity-cost") {
-    //       middleware(1);
-    //     }
-    //     //酒店及住宿费
-    //     if (from.path == "/stay-cost") {
-    //       middleware(2);
-    //     }
-    //     //交通费
-    //     if (from.path == "/traffic-cost") {
-    //       middleware(3);
-    //     }
-    //     //其他费用
-    //     if (from.path == "/rest-cost") {
-    //       middleware(4);
-    //     }
+        //办公费用
+        if (from.path == "/work-cost") {
+          middleware(0);
+        }
+        //活动费
+        if (from.path == "/activity-cost") {
+          middleware(1);
+        }
+        //酒店及住宿费
+        if (from.path == "/stay-cost") {
+          middleware(2);
+        }
+        //交通费
+        if (from.path == "/traffic-cost") {
+          middleware(3);
+        }
+        //其他费用
+        if (from.path == "/rest-cost") {
+          middleware(4);
+        }
 
-    //     if (
-    //       (vm.type == "apply" || vm.type == "edit") &&
-    //       _.endsWith(from.path, "cost")
-    //     ) {
-    //       vm.totalMoeny = 0;
+        if (
+          (vm.type == "apply" || vm.type == "edit") &&
+          _.endsWith(from.path, "cost")
+        ) {
+          vm.totalMoeny = 0;
 
-    //       _.each(vm.countAndSumMoney, o => {
-    //         _.each(o.billApplyItemList, v => {
-    //           vm.totalMoeny += Number(v.money);
-    //         });
-    //       });
-    //     }
-    //   });
-    // },
+          _.each(vm.countAndSumMoney, o => {
+            _.each(o.billApplyItemList, v => {
+              vm.totalMoeny += Number(v.money);
+            });
+          });
+        }
+      });
+    },
     methods: {
       ...mapMutations(["setTransition"]),
       goPrev() {
@@ -813,6 +813,7 @@
           return;
         }
 
+        // console.log(i,item)
         this.setTransition("turn-on");
         switch (i) {
           case 0:

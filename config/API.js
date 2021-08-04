@@ -2,7 +2,7 @@ const chalk = require("chalk");
 
 let alpha = {
   // URL: "http://jtoatest.cmdmedia.cn",
-  URL: "http://112.126.61.79:8056/medoa",
+  URL: "http:///47.101.37.217:8777/medoa",
   // URL: "http://60.195.252.65:8081",
   // URL: 'http://192.168.2.233:8080',
   INFO_URL: "http://60.195.252.86:8082",

@@ -6,7 +6,7 @@ const vueLoaderConfig = require("./vue-loader.conf");
 var glob = require("glob");
 var entries = getEntry(["./src/module/*.js", "./src/module/**/*.js"]);
 
-console.log("entries:::", entries);
+
 const TransformModulesPlugin = require("webpack-transform-modules-plugin");
 const PostCompilePlugin = require("webpack-post-compile-plugin");
 const vuxLoader = require("vux-loader");

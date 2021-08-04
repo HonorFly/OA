@@ -80,7 +80,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   ]
 });
 const pages = getEntry(["./src/module/*.html", "./src/module/**/*.html"]);
-console.log("pages:::", pages);
+
 for (var pathname in pages) {
   // 配置生成的html文件，定义路径等
   var conf = {
@@ -97,7 +97,6 @@ for (var pathname in pages) {
 
   devWebpackConfig.plugins.push(new HtmlWebpackPlugin(conf));
 }
-console.log("devWebpackConfig:::", devWebpackConfig.plugins);
 
 function getEntry(globPath) {
   var entries = {},

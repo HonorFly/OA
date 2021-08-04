@@ -1,5 +1,6 @@
 import axios from '@/config/axios.js';
 import instance from 'axios';
+import { reject } from 'lodash';
 let upload = instance.create();
 import {
     Toast
@@ -20,29 +21,29 @@ export async function _getData(url = '', data = {}, config = {}) {
         },
         ...data
     }, config).then(data => {
-        console.log(data)
-            // console.log(router)
+        // console.log("zou ::",data)
         if (data.data.code == 0 || data.data.code == 200) {
-            // console.log(router)
             if (data.data.code == 200) {
                 return data.data
             } else {
                 return data.data.result
             }
-
+        }else{
+            return data.data
         }
-
     }).catch(err => {
         // /* if (errorCallBack) {
         //     errorCallBack(err)
         // } else {
         //     console.log(err)
         // } */
+        console.log("错误：",err)
+        reject(err)
     })
 }
 export async function uploadImage(url = '', data = {}) {
     return await upload.post(url, data, {
-        baseURL: `${process.env.API_HOST.URL}/med/api/`
+        baseURL: `${process.env.API_HOST.URL}/api/`
     }).then(data => {
         console.log(data)
             // console.log(router)

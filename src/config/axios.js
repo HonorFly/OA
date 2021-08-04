@@ -1,6 +1,6 @@
 // config axios https://www.jianshu.com/p/7a9fbcbb1114
 import axios from "axios";
-
+ 
 let request = axios.create();
 
 request.defaults.timeout = 5000; //请求超时时间

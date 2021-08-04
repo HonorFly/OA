@@ -179,7 +179,7 @@
             margin-bottom: 2px;
           }
           i {
-
+            flex: 1;
             font-style: normal;
             line-height: 20px;
           }

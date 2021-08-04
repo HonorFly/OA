@@ -7,7 +7,7 @@
           ref="person"
           v-model.trim="data[index].fromTime"
           placeholder="请选择到达时间"
-          readonly
+          disabled
           @click="showDateTimePicker1"
         />
       </li>
@@ -17,21 +17,21 @@
           ref="person"
           v-model.trim="data[index].endTime"
           placeholder="请选择离开时间"
-          readonly
+          disabled
           @click="showDateTimePicker2"
         />
       </li>
       <li>
-        <span>维修时长:</span>
+        <span>维修时长(h):</span>
         <van-field
           ref="person"
           v-model.trim="data[index].hours"
           placeholder="维修时长"
-          readonly
+          disabled
         />
       </li>
       <li>
-        <span>出差时长:</span>
+        <span>出差时长(h):</span>
         <van-field
           ref="person"
           v-model.trim="data[index].travelHours"
@@ -115,6 +115,7 @@
             this.maintainTime = this.transformTime(
               this.unixDate2 - date.getTime()
             );
+            this.data[this.index].hours = this.maintainTime;
           }
         }
         this.unixDate1 = date.getTime();
@@ -122,6 +123,7 @@
           selectedVal.slice(0, 3).join("-") +
           " " +
           selectedVal.slice(3).join(":");
+        this.data[this.index].fromTime = this.currentDate1;
       },
       selectHandle2(date, selectedVal, selectedText) {
         if (this.unixDate1) {
@@ -136,6 +138,7 @@
             this.maintainTime = this.transformTime(
               date.getTime() - this.unixDate1
             );
+            this.data[this.index].hours = this.maintainTime;
           }
         }
         this.unixDate2 = date.getTime();
@@ -143,10 +146,11 @@
           selectedVal.slice(0, 3).join("-") +
           " " +
           selectedVal.slice(3).join(":");
+        this.data[this.index].endTime = this.currentDate2;
       },
       transformTime(unix) {
         let h = (unix / 1000 / 60 / 60).toFixed(2);
-        return `${h}小时`;
+        return `${h}`;
       },
     },
   };
@@ -161,7 +165,7 @@
       align-items: center;
       margin-bottom: 10px;
       span {
-        width: 78px;
+        width: 98px;
       }
       .van-cell {
         flex: 1;
@@ -174,6 +178,9 @@
         padding: 10px;
         justify-content: space-between;
         @include placeholder();
+        /deep/ .van-field__control:disabled{
+          color: #323233;
+        }
       }
       &:last-child {
         justify-content: center;

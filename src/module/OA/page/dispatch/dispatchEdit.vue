@@ -1,9 +1,9 @@
 <template>
   <div id="dispatch-edit">
-    <header-vue :type="type" :data="details"></header-vue>
+    <header-vue name="编辑派工" ></header-vue>
     <div class="container" ref="container">
       <div class="top">
-        <h2>编辑派工</h2>
+        <!-- <h2>编辑派工</h2> -->
         <div class="number">
           <h3>
             <span>
@@ -100,6 +100,7 @@
           </h3>
           <ul>
             <service-time-vue
+              ref="time"
               v-for="(item, index) in dispatchItem"
               :key="index"
               :data="dispatchItem"
@@ -130,11 +131,7 @@
         dispatchItem: [],
         file: [],
         fileList: [],
-        content: "",
-        desc: "",
         details: {},
-        picker1: null, //所属公司
-        number: "", //申请数量
         noteFlag: false,
         submitFlag: false,
         scrollTop: 0,
@@ -152,25 +149,18 @@
       ...mapMutations(["setTransition"]),
       clickHandle(val) {
         if (val === "add") {
-          this.dispatchItem.push(this.dispatchItem.length + 1);
+          this.dispatchItem.push({fromTime:"",endTime:'',hours:'',travelHours:''});
         } else {
           this.dispatchItem.pop();
         }
       },
       submit(val) {
-        if (val == "submitFlag") {
-          this.submitFlag = false;
+        console.log(this.details,this.$refs.time[0].data)
+        const times = this.$refs.time[0].data;
+        if(this.file.length===0){
+          this.$toast("请上传工单照片");
           return;
         }
-        if (val == "submit") {
-          if (_.isEmpty(this.details)) {
-            this.details = {
-              person: "",
-              tel: "",
-              adr: "",
-              note: "",
-            };
-          }
 
           if (!this.details.note) {
             this.noteFlag = true;
@@ -180,15 +170,42 @@
           } else {
             this.noteFlag = false;
           }
-          _getData("license/saveLicense", this.details).then(() => {
+
+          for (let index = 0; index < times.length; index++) {
+            const item = times[index];
+            if(!(item.fromTime&&item.endTime&&item.hours&&item.travelHours)){
+                this.$toast('请检查"服务时间"是否有空')
+                return;
+            }else{
+              item.hours = parseFloat(item.hours);
+              item.travelHours = parseFloat(item.travelHours);
+            }
+          }
+
+          let str = '',name='',len=this.file.length;
+          _.each(this.file,(v,i)=>{
+            if(i===len-1){
+              str += v.url;
+              name += v.name;
+            }else{
+              str += v.url+'#';
+              name += v.name+'#';
+            }
+          })
+          this.details.file = str;
+          this.details.fileName = name;
+          this.details.dispatchItem = times;
+          _getData("dispatch/saveDispatchItemEntity", this.details).then((res) => {
+            console.log("hhhhhhhhhh",res)
             this.submitFlag = true;
-            this.$route.params.path = "saveBtn";
-            this.$toast("提交成功");
-            this.details = {};
-            this.$router.go(-1);
+            if(res===undefined || res.code){
+              this.$toast("失败，请稍后重试")
+            }else{
+              this.$toast("保存成功");
+            }
+          }).catch(err=>{
+            this.$toast("失败，请稍后重试")
           });
-          this.setTransition("turn-on");
-        }
       },
       //更新图片
       updata(val) {
@@ -196,17 +213,26 @@
       },
       getDispatchDetail() {
         _getData("dispatch/getDispatch", {
-          id: "1" || this.$route.query.id,
+          id: this.$route.query.id,
         }).then((res) => {
           console.log("详情：：：", res);
           this.details = res.dispatch || {};
           this.dispatchItem = res.dispatchItem;
+          if(res.dispatch.file){
+              this.file = res.dispatch.file.split("#");
+              this.fileName = res.dispatch.fileName.split("#");
+              _.each(this.file,(v,i)=>{
+                  this.fileList.push({url:v,name:this.fileName[i+1]})
+              })
+              this.file = this.fileList;
+          }
+
           if (this.dispatchItem.length) return;
           res.dispatchItem.push({
             fromTime: "",
             endTime: "",
             hours: "",
-            traveHours: "",
+            travelHours: "",
           });
           //  console.log(res.dispatchItem)
         });
@@ -230,10 +256,9 @@
       background: $base-background;
       padding: 0;
       .top {
-        padding: 0 13px;
+        padding: 16px 13px 32px;
         background: #fff;
         margin-bottom: 30px;
-        padding-bottom: 32px;
         &.detailDisabled {
           h3 {
             color: #666;
