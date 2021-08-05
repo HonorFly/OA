@@ -25,17 +25,24 @@ function getUrlParam (name) {
   }
 }
 
-g_userid = getUrlParam('oaId')
+var g_userid = getUrlParam('oaId')
 if (g_userid == null || g_userid == 'null') {
   g_userid = window.sessionStorage.getItem('g_userid')
 } else {
   window.sessionStorage.setItem('g_userid', g_userid)
 }
-g_token = getUrlParam('token')
+var g_token = getUrlParam('token')
 if (g_token == null || g_token == 'null') {
   g_token = window.sessionStorage.getItem('g_token')
 } else {
   window.sessionStorage.setItem('g_token', g_token)
+}
+
+var userName = getUrlParam('name')
+if (userName == null || userName == 'null') {
+  userName = window.sessionStorage.getItem('userName')
+} else {
+  window.sessionStorage.setItem('userName', userName)
 }
 
 var userId = commonMessage().userid
@@ -102,7 +109,8 @@ function commonMessage () {
       userid: g_userid || 8, // 刘翠蕾1962 李敏2077 马海平1905 丁哥 1950 董1956 翟 1963
       token: g_token,
       urlBanner: urlBanner,
-      urlQuestionnaire: urlQuestionnaire
+      urlQuestionnaire: urlQuestionnaire,
+      userName: userName || '刘鹏'
     })
   }
 }

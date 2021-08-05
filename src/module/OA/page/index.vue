@@ -1,7 +1,7 @@
 <template>
   <div id="index">
     <header-vue name="执与生物科技" :showBack="false">
-      <van-icon name="user-o" @click="openFullscreen = true" />
+      <img src="../../../assets/images/more.png" @click="openFullscreen = true">
     </header-vue>
     <div class="container" ref="container">
       <div class="banner">
@@ -260,16 +260,34 @@
       <mu-dialog transition="slide-right" :open.sync="openFullscreen">
         <div class="container">
           <div class="headerImg">
-            <img src="@/assets/images/8.png" alt="logo" />
+            <img src="@/assets/images/logo.png" alt="logo" />
           </div>
-          <div class="userName">刘鹏</div>
+          <div class="userName">{{userInfo.userName}}</div>
           <div class="content">
             <ul>
-              <li>版本 1.0.0</li>
-              <li @click="cacheHandle">清理缓存</li>
+              <li>
+                <div class="left-box">
+                  <img src="../../../assets/images/version.png" >
+                  <span>版本 </span>
+                </div>
+                <div class="right-box">
+                  1.0.0
+                  <!-- <img src="../../../assets/images/arrow-right.png" > -->
+                </div>
+              </li>
+              <li @click="cacheHandle">
+                <div class="left-box">
+                  <img src="../../../assets/images/clear-cache.png">
+                  <span>清理缓存</span>
+                </div>
+                <div class="right-box">
+                  <img src="../../../assets/images/arrow-right.png">
+                </div>
+              </li>
             </ul>
           </div>
-          <div class="footer" @click="window.command.loginOut('s')">
+          <div class="footer" @click="logout">
+            <img src="../../../assets/images/logout.png" alt="">
             退出登录
           </div>
         </div>
@@ -283,6 +301,7 @@
   import { _getData } from "../service/getData";
   import { mapMutations } from "vuex";
   let img = require("../../../../static/images/banner@2x.png");
+  const userInfo = commonMessage();
   export default {
     data() {
       return {
@@ -291,6 +310,7 @@
         count: 0,
         data: {},
         openFullscreen: false,
+        userInfo
       };
     },
     components: {
@@ -301,6 +321,9 @@
       cacheHandle() {
         this.$toast("清理成功");
       },
+      logout(){
+        window.command.loginOut('s');
+      }
     },
     activated() {
       _getData("backLog/AllAuditCount", {}).then((data) => {
@@ -595,7 +618,8 @@
   .mu-dialog-wrapper {
     justify-content: flex-end;
     /deep/ .mu-dialog {
-      width: 75%;
+      width: 86%;
+      max-width: 86%;
       height: 100%;
       .mu-dialog-body {
         width: 100%;
@@ -605,47 +629,74 @@
           width: 100%;
           height: 100%;
           background-color: #fff;
+          padding: 0;
         }
       }
       .headerImg {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100px;
+        height: 140px;
+        margin-top: 20px;
         img {
-          width: 60px;
-          height: 60px;
+          width: 80px;
+          height: 80px;
           border-radius: 50%;
         }
       }
       .userName {
         display: flex;
         justify-content: center;
-        height: 76px;
       }
       .content {
-        padding: 0 13px;
+        padding: 60px 20px 30px 20px;
         margin-bottom: 30px;
         ul {
           li {
             width: 100%;
-            height: 46px;
+            height: 52px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             font-size: 16px;
             color: #666;
+            .left-box{
+              display: flex;
+              align-items: center;
+              img{
+                width: 20px;
+                height: 20px;
+                margin-right: 18px;
+              }
+              span{
+                font-size: 15px;
+                color: #333333;
+              }
+            }
+            .right-box{
+              img{
+                width: 18px;
+                height: 19px;
+              }
+            }
           }
         }
       }
       .footer {
-        height: 46px;
+        width: 236px;
+        height: 52px;
+        background: #F6F6F6;
+        border-radius: 26px;
         display: flex;
         justify-content: center;
         align-items: center;
         color: #40a9ff;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
+        margin: 0 auto;
+        img{
+          width: 20px;
+          height: 20px;
+          margin-right: 18px;
+        }
       }
     }
   }

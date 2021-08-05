@@ -41,37 +41,18 @@
         </swiper-item> -->
       </swiper>
     </div>
-    <!-- <footer-vue
-      :footer="footer"
-      v-on:tab="tab"
-      :currentIndex="index"
-    ></footer-vue> -->
   </div>
 </template>
 
 <script>
   import headerVue from "../../components/header/header.vue";
   import { _getData } from "../../service/getData";
-  import footerVue from "../../components/footer/footer-tabbar";
   import { Swiper, SwiperItem } from "vux";
   import recordVue from "../../components/main/record.vue";
-  const footer = [
-    {
-      name: "待我审批",
-      icon: "approve-await-icon.png",
-      iconActive: "approve-await-icon-active.png",
-    },
-    {
-      name: "我已审批",
-      icon: "approve-icon.png",
-      iconActive: "approve-icon-active.png",
-    },
-  ];
 
   export default {
     data() {
       return {
-        footer,
         index: 0,
         approveList: [], //我已审批
         awaitList: [], //待我审批
@@ -86,7 +67,7 @@
     },
     props: ["isApproval"],
     created() {
-      this.getAwaitData();
+      // this.getAwaitData();
     },
     beforeRouteEnter(to, from, next) {
       next((vm) => {
@@ -211,7 +192,6 @@
     },
     components: {
       headerVue,
-      footerVue,
       Swiper,
       SwiperItem,
       recordVue,

@@ -15,7 +15,7 @@
         </li>
         <li>
           <div class="leftLay">
-            <span>开单时间</span><i>{{ data.dispatchTime }}</i>
+            <span>开单时间</span><i>{{ data.dispatchTime&&data.dispatchTime.split(" ")[0] }}</i>
           </div>
           <div class="rightLay">
             <span>开单人</span><i>{{ data.fullName }}</i>
@@ -177,6 +177,7 @@
             color: #666666;
             line-height: 20px;
             margin-bottom: 2px;
+            align-items: center;
           }
           i {
             flex: 1;
