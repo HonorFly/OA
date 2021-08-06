@@ -79,22 +79,30 @@
         console.log(this.judgeBack);
         this.$emit("goPrev");
         if (!this.judgeBack) {
-          if (
-            this.$router.currentRoute.path == "/" ||
-            this.$route.query.fromNative == 1 ||
-            getUrlParam("fromNative") == 2
-          ) {
-            isBackNativePage();
-          } else {
-            this.$router.go(-1);
-            this.$store.commit("setTransition", "turn-off");
-            if (this.saveId) {
-              this.$emit("changeSaveId", "");
-            }
-            if (this.editSelectId) {
-              this.$emit("changeEditSelectId", "");
-            }
+          this.$router.go(-1);
+          this.$store.commit("setTransition", "turn-off");
+          if (this.saveId) {
+            this.$emit("changeSaveId", "");
           }
+          if (this.editSelectId) {
+            this.$emit("changeEditSelectId", "");
+          }
+          // if (
+          //   this.$router.currentRoute.path == "/" ||
+          //   this.$route.query.fromNative == 1 ||
+          //   getUrlParam("fromNative") == 2
+          // ) {
+          //   isBackNativePage();
+          // } else {
+          //   this.$router.go(-1);
+          //   this.$store.commit("setTransition", "turn-off");
+          //   if (this.saveId) {
+          //     this.$emit("changeSaveId", "");
+          //   }
+          //   if (this.editSelectId) {
+          //     this.$emit("changeEditSelectId", "");
+          //   }
+          // }
         }
       },
       delClick() {

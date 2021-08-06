@@ -59,12 +59,16 @@
       ...mapMutations(["setTransition"]),
       handleClick({ id, courseware }) {
         this.setTransition("turn-on");
-        this.$router.push({
-          path: "/train-video",
-          query: {
-            url: courseware,
-          },
-        });
+        if (courseware.endsWith(".pdf")) {
+          openPdf(courseware);
+        } else {
+          this.$router.push({
+            path: "/train-video",
+            query: {
+              url: courseware,
+            },
+          });
+        }
       },
     },
   };
