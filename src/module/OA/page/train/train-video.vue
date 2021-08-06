@@ -1,9 +1,15 @@
+<!--
+ * @Author: lxb
+ * @Date: 2021-08-04 22:56:58
+ * @Description:
+ * @LastEditTime: 2021-08-05 10:25:47
+-->
 <template>
   <div class="train-video">
     <header-vue name="培训视频"></header-vue>
     <div class="container">
       <div id="myPDF" v-if="type == 'pdf'"></div>
-      <video :src="url" autoplay v-if="type == 'mp4'"></video>
+      <video :src="url" autoplay v-if="type == 'mp4'" controls></video>
     </div>
   </div>
 </template>

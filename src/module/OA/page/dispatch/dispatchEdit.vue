@@ -8,7 +8,7 @@
           <h3>
             <span>
               <img
-                src="../../../../assets/images/company.png"
+                src="../../../../assets/images/dispatchNo.png"
                 width="20"
                 height="21"
               />
@@ -21,7 +21,7 @@
           <h3>
             <span>
               <img
-                src="../../../../assets/images/company.png"
+                src="../../../../assets/images/faultDescribe.png"
                 width="20"
                 height="21"
               />
@@ -40,7 +40,7 @@
           <h3>
             <span>
               <img
-                src="../../../../assets/images/company.png"
+                src="../../../../assets/images/serviceContent.png"
                 width="20"
                 height="21"
               />
@@ -59,7 +59,7 @@
           <h3>
             <span>
               <img
-                src="../../../../assets/images/company.png"
+                src="../../../../assets/images/dispatchUpload.png"
                 width="20"
                 height="21"
               />
@@ -348,7 +348,9 @@
         .number {
           display: flex;
           justify-content: space-between;
+          align-items: center;
           span {
+            height: 22px;
             font-size: 17px;
             font-weight: bold;
             background-image: -webkit-gradient(
