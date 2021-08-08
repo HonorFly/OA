@@ -25,7 +25,7 @@ function getUrlParam (name) {
   }
 }
 
-var g_userid = getUrlParam('oaId')
+var g_userid = getUrlParam('userId')
 if (g_userid == null || g_userid == 'null') {
   g_userid = window.sessionStorage.getItem('g_userid')
 } else {
@@ -44,7 +44,7 @@ if (userName == null || userName == 'null') {
 } else {
   window.sessionStorage.setItem('userName', userName)
 }
-
+console.log('用户名：', name, '用户id：', g_userid)
 var userId = commonMessage().userid
 
 // "userid":"测试7544"'12207'10533 '10504'正式15301',

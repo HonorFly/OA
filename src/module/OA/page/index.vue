@@ -322,7 +322,19 @@
         this.$toast("清理成功");
       },
       logout(){
-        window.command.loginOut('s');
+        this.$dialog
+            .confirm({
+              message: "您确定推出吗?",
+              overlayStyle: {
+                background: "rgba(0,0,0,0.30)",
+              },
+            })
+            .then(() => {
+               window.command.loginOut('s');
+            })
+            .catch(() => {
+               this.$dialog.close();
+            });
       }
     },
     activated() {
@@ -700,9 +712,17 @@
       }
     }
   }
+
+
 </style>
-<style>
+<style lang="scss">
   .van-toast {
     z-index: 99999999 !important;
   }
+   .van-dialog {
+    z-index: 99999999 !important;
+  }
+  .van-overlay{
+       z-index: 20219999 !important;
+    }
 </style>

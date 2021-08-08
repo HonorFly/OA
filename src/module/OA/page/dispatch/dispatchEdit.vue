@@ -140,8 +140,12 @@
     mixins: [getDay, iosKeyboard],
     props: ["type", "isApproval"],
     activated() {
+      this.dispatchItem = [];
+      this.file = [];
+      this.fileList = [];
       this.scrollTop = 0;
       this.details = {};
+      this.submitFlag = false;
       this.noteFlag = false;
       this.getDispatchDetail();
     },
@@ -198,6 +202,7 @@
           _getData("dispatch/saveDispatchItemEntity", this.details).then((res) => {
             console.log("hhhhhhhhhh",res)
             this.submitFlag = true;
+            this.$router.go(-1)
             if(res===undefined || res.code){
               this.$toast("失败，请稍后重试")
             }else{

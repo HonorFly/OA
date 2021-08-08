@@ -1,6 +1,6 @@
 <template>
   <div id="header" :class="createClass">
-    <span class="back" @click="showBack && goPrev()">
+    <span class="back" @click="goPrev">
       <img v-show="showBack" src="../../../../assets/images/back.png" alt="" />
     </span>
     <h2>
@@ -43,8 +43,12 @@
         false
       );
     },
+    created(){
+      // console.log("3333:",this.showBack,this.judgeBack);
+    },
     activated() {
       console.log(userId);
+      // console.log("222:",this.showBack,this.judgeBack);
     },
     computed: {
       createClass() {
@@ -76,33 +80,38 @@
        * @params （1,2） 1 进入首页时传入，代表进入整个oa系统页面，2 进入OA某一特定页面时传入
        **/
       goPrev() {
-        console.log(this.judgeBack);
-        this.$emit("goPrev");
-        if (!this.judgeBack) {
-          this.$router.go(-1);
-          this.$store.commit("setTransition", "turn-off");
-          if (this.saveId) {
-            this.$emit("changeSaveId", "");
-          }
-          if (this.editSelectId) {
-            this.$emit("changeEditSelectId", "");
-          }
-          // if (
-          //   this.$router.currentRoute.path == "/" ||
-          //   this.$route.query.fromNative == 1 ||
-          //   getUrlParam("fromNative") == 2
-          // ) {
-          //   isBackNativePage();
-          // } else {
-          //   this.$router.go(-1);
-          //   this.$store.commit("setTransition", "turn-off");
-          //   if (this.saveId) {
-          //     this.$emit("changeSaveId", "");
-          //   }
-          //   if (this.editSelectId) {
-          //     this.$emit("changeEditSelectId", "");
-          //   }
-          // }
+
+        // console.log("111:",this.showBack,this.judgeBack);
+        if(this.showBack){
+
+             this.$emit("goPrev");
+            if (!this.judgeBack) {
+              alert("444:"+l)
+              this.$router.back();
+              this.$store.commit("setTransition", "turn-off");
+              if (this.saveId) {
+                this.$emit("changeSaveId", "");
+              }
+              if (this.editSelectId) {
+                this.$emit("changeEditSelectId", "");
+              }
+              // if (
+              //   this.$router.currentRoute.path == "/" ||
+              //   this.$route.query.fromNative == 1 ||
+              //   getUrlParam("fromNative") == 2
+              // ) {
+              //   isBackNativePage();
+              // } else {
+              //   this.$router.go(-1);
+              //   this.$store.commit("setTransition", "turn-off");
+              //   if (this.saveId) {
+              //     this.$emit("changeSaveId", "");
+              //   }
+              //   if (this.editSelectId) {
+              //     this.$emit("changeEditSelectId", "");
+              //   }
+              // }
+            }
         }
       },
       delClick() {
@@ -127,6 +136,11 @@
       isApproval: { type: [Boolean, String], default: false },
       judgeBack: { type: Boolean, default: false },
     },
+    watch:{
+      showBack(newVal){
+         alert("新值:",newVal)
+      }
+    }
   };
 </script>
 

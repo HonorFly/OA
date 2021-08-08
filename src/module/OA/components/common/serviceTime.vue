@@ -79,14 +79,24 @@
         type: Number,
       },
     },
+    watch:{
+      index(newValue){
+         this.unixDate1 = new Date(this.data[newValue].fromTime).getTime()
+         this.unixDate2 = new Date(this.data[newValue].endTime).getTime()
+         console.log("变化：：",this.unixDate1,this.unixDate2)
+      }
+    },
     methods: {
       showDateTimePicker1() {
+        this.unixDate1 = new Date(this.data[this.index].fromTime).getTime();
+        this.unixDate2 = new Date(this.data[this.index].endTime).getTime();
+        // console.log("111:",this.unixDate1,this.unixDate2)
         if (!this.dateTimePicker1) {
           this.dateTimePicker1 = this.$createDatePicker({
             title: "选择到达时间",
             min: new Date(2018, 7, 8, 8, 0),
             max: new Date(2099, 9, 20, 20, 59),
-            value: new Date(),
+            value: this.data[this.index].fromTime&&new Date(this.data[this.index].fromTime) || new Date(),
             columnCount: 5,
             onSelect: this.selectHandle,
           });
@@ -94,12 +104,15 @@
         this.dateTimePicker1.show();
       },
       showDateTimePicker2() {
+        this.unixDate1 = new Date(this.data[this.index].fromTime).getTime();
+        this.unixDate2 = new Date(this.data[this.index].endTime).getTime();
+        // console.log("222:",this.unixDate1,this.unixDate2)
         if (!this.dateTimePicker2) {
           this.dateTimePicker2 = this.$createDatePicker({
             title: "选择离开时间",
             min: new Date(2018, 7, 8, 8, 0),
             max: new Date(2099, 9, 20, 20, 59),
-            value: new Date(),
+            value: this.data[this.index].endTime&&new Date(this.data[this.index].endTime) || new Date(),
             columnCount: 5,
             onSelect: this.selectHandle2,
           });
@@ -109,7 +122,11 @@
       selectHandle(date, selectedVal, selectedText) {
         if (this.unixDate2) {
           if (date.getTime() > this.unixDate2) {
-            this.$createToast("到达时间不能晚于离开时间");
+             this.$createToast({
+              txt: "到达时间不能晚于离开时间",
+              type: "warn",
+              time: 1000,
+            }).show();
             return;
           } else {
             this.maintainTime = this.transformTime(
@@ -118,11 +135,12 @@
             this.data[this.index].hours = this.maintainTime;
           }
         }
+
         this.unixDate1 = date.getTime();
         this.currentDate1 =
-          selectedVal.slice(0, 3).join("-") +
+          selectedText.slice(0, 3).join("-") +
           " " +
-          selectedVal.slice(3).join(":");
+          selectedText.slice(3).join(":");
         this.data[this.index].fromTime = this.currentDate1;
       },
       selectHandle2(date, selectedVal, selectedText) {
@@ -143,9 +161,9 @@
         }
         this.unixDate2 = date.getTime();
         this.currentDate2 =
-          selectedVal.slice(0, 3).join("-") +
+          selectedText.slice(0, 3).join("-") +
           " " +
-          selectedVal.slice(3).join(":");
+          selectedText.slice(3).join(":");
         this.data[this.index].endTime = this.currentDate2;
       },
       transformTime(unix) {
